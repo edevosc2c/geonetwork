@@ -272,7 +272,7 @@
                     scope.statusCode = response.data.description;
                     scope.isPublished = false;
                   }
-);
+                );
             };
 
             /**

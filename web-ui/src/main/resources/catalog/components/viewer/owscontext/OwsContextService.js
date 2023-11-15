@@ -94,7 +94,8 @@
       // eg. name="{type=arcgis,name=0,1,2,3,4}"
       var reT = /type=([^,}|^]*)/;
       var reL = /name=([^}]*)\}?\s*$/;
-var dimensions = ["TIME", "ELEVATION"];
+      var dimensions = ["TIME", "ELEVATION"];
+
       /**
        * @ngdoc method
        * @name gnOwsContextService#loadContext
@@ -230,7 +231,8 @@ var dimensions = ["TIME", "ELEVATION"];
           for (i = 0; i < layers.length; i++) {
             var type,
               layer = layers[i];
-            if (layer.group == "Background layers") {var layerAttributionArray;
+            if (layer.group == "Background layers") {
+              var layerAttributionArray;
               if (layer.vendorExtension && layer.vendorExtension.attribution) {
                 layerAttributionArray = [];
                 for (var a = 0; a < layer.vendorExtension.attribution.length; a++) {
@@ -278,6 +280,7 @@ var dimensions = ["TIME", "ELEVATION"];
                   }
                 }
               };
+
               // {type=bing_aerial} (mapquest, osm ...)
               // {type=arcgis,name=0,1,2}
               // type=wms,name=lll
@@ -704,7 +707,7 @@ var dimensions = ["TIME", "ELEVATION"];
           }
           if (processInputs) {
             extension.processInputs = processInputs;
-         }
+          }
           if (layer.showInfo) {
             extension.enabled = true; // Enabled in layer manager
           }
@@ -786,7 +789,7 @@ var dimensions = ["TIME", "ELEVATION"];
        * @param {numeric} index of the layer in the tree
        */
       this.createLayer = function (layer, map, bgIdx, index, style) {
-var res = { href: "" };
+        var res = { href: "" };
         if (layer.server) {
           var server = layer.server[0];
           res = server.onlineResource[0];

@@ -40,7 +40,6 @@
                 .title
           : rangeValue;
       };
-      };
     }
   ]);
 

@@ -147,7 +147,6 @@
           sidePagination: "server",
           queryParamsType: "page,size",
           contentType: "application/x-www-form-urlencoded",
-          method: "get",
           pagination: true,
           paginationLoop: true,
           paginationHAlign: "right",

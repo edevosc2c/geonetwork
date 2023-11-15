@@ -335,17 +335,20 @@
                     cache: true,
                     timeout: timeout
                   })
-                  .then(function (response) {
+                  .then(
+                    function (response) {
                       var data = response.data;
-                    if (data) {
-                      defer.resolve(parseWMTSCapabilities(data));
-                    } else {
-                      defer.reject();
+
+                      if (data) {
+                        defer.resolve(parseWMTSCapabilities(data));
+                      } else {
+                        defer.reject();
+                      }
+                    },
+                    function (response) {
+                      defer.reject(response.status);
                     }
-                  },
-                  function (response) {
-                    defer.reject(response.status);
-                  });
+                  );
               }
             }
             return defer.promise;
@@ -370,7 +373,7 @@
                   })
                   .then(
                     function (response) {
-                    var xfsCap = parseWFSCapabilities(response.data);
+                      var xfsCap = parseWFSCapabilities(response.data);
 
                       if (!xfsCap || xfsCap.exception != undefined) {
                         defer.reject({
@@ -408,7 +411,7 @@
                   })
                   .then(
                     function (response) {
-                    var xfsCap = parseWCSCapabilities(response.data);
+                      var xfsCap = parseWCSCapabilities(response.data);
 
                       if (!xfsCap || xfsCap.exception != undefined) {
                         defer.reject({
@@ -585,7 +588,6 @@
                 name == layers[i].name.localPart ||
                 name == layers[i].name.prefix + ":" + layers[i].name.localPart ||
                 name == layers[i].Name
-
               ) {
                 needles.push(layers[i]);
                 continue;

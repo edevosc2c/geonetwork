@@ -87,8 +87,8 @@
       // take the bigger of the two values$scope.passwordMinLength = Math.max(
         gnConfig["system.security.passwordEnforcement.minLength"],
         6
-      );
-      $scope.passwordMaxLength = Math.max(
+
+      );$scope.passwordMaxLength = Math.max(
         gnConfig["system.security.passwordEnforcement.maxLength"],
         6
 

@@ -442,14 +442,15 @@
         }
 
         scope.$watch(
-          "user", function (n, o) {
-          if (n !== o || scope.selections === null) {
-            scope.selections = null;
-            controller.getSelections(scope.user).then(function (selections) {
-              scope.selections = selections;
-            });
-          }
-        },
+          "user",
+          function (n, o) {
+            if (n !== o || scope.selections === null) {
+              scope.selections = null;
+              controller.getSelections(scope.user).then(function (selections) {
+                scope.selections = selections;
+              });
+            }
+          },
           true
         );
 

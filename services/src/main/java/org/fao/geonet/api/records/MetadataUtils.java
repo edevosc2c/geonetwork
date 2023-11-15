@@ -742,38 +742,6 @@ public class MetadataUtils {
         return content;
     }
 
-    public static void backupRecord(AbstractMetadata metadata, ServiceContext context) {
-        Log.trace(Geonet.DATA_MANAGER, "Backing up record " + metadata.getId());
-        Path outDir = Lib.resource.getRemovedDir(metadata.getId());
-        Path outFile;
-        try {
-            // When metadata records contains character not supported by filesystem
-            // it may be an issue. eg. acri-st.fr/96443
-            outFile = outDir.resolve(URLEncoder.encode(metadata.getUuid(), Constants.ENCODING) + ".zip");
-        } catch (UnsupportedEncodingException e1) {
-            outFile = outDir.resolve(String.format(
-                "backup-%s-%s.mef",
-                new Date(), metadata.getUuid()));
-        }
-
-        Path file = null;
-        try {
-            file = MEFLib.doExport(context, metadata.getUuid(), "full", false, true, false, false, true);
-            Files.createDirectories(outDir);
-            try (InputStream is = IO.newInputStream(file);
-                 OutputStream os = Files.newOutputStream(outFile)) {
-                BinaryFile.copy(is, os);
-            }
-        } catch (Exception e) {
-            throw new RuntimeException("Error performing backup on record '" + metadata.getUuid() + "'. Contact the system administrator if the problem persists: " + e.getMessage(), e);
-        } finally {
-            if (file != null) {
-                IO.deleteFile(file, false, Geonet.MEF);
-            }
-        }
-    }
-
-
     /**
      * Returns the metadata validation status from the database, calculating/storing the validation if not stored.
      *

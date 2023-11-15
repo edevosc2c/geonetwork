@@ -23,8 +23,6 @@
 
 package org.fao.geonet.component.csw;
 
-import org.fao.geonet.kernel.search.IndexingMode;
-import org.locationtech.jts.util.Assert;
 import jeeves.server.UserSession;
 import jeeves.server.context.ServiceContext;
 import org.fao.geonet.ApplicationContextHolder;
@@ -360,6 +358,7 @@ public class Transaction extends AbstractOperation implements CatalogService {
             }
 
             beforeMetadata = metadataUtils.findOneByUuid(uuid).getXmlData(false);
+
             String language = context.getLanguage();
             dataMan.updateMetadata(context, id, xml,
                 applyValidation, applyUpdateFixedInfo,

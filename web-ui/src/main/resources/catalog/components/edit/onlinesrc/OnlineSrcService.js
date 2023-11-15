@@ -140,8 +140,7 @@
 
           if (params.wmsResources.addLayerNamesMode == "resourcename") {
             angular.extend(params, {
-              name: names.join(","),
-              desc: descs.join(",")
+              name: names.join(",")
             });
           }
         }
@@ -209,7 +208,6 @@
               });
             }
           );
-        });
         });
       };
 
@@ -715,12 +713,14 @@
          * @param {Object} onlinesrc the online resource to remove
          */
         removeOnlinesrc: function (onlinesrc) {
-var url = onlinesrc.lUrl || onlinesrc.url;
+          var url = onlinesrc.lUrl || onlinesrc.url;
           if (
             url.match(".*/api/records/' + gnCurrentEdit.uuid + '/attachments/.*") != null
           ) {
             url = gnUrlUtils.remove(url, ["approved"], true);
-          }          return runProcess(
+          }
+
+          return runProcess(
             this,
             setParams("onlinesrc-remove", {
               id: gnCurrentEdit.id,

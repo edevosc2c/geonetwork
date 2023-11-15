@@ -88,14 +88,14 @@ public class JeevesNodeAwareLogoutSuccessHandler extends AbstractAuthenticationT
 
                     String siteHost = settingManager.getValue(Settings.SYSTEM_SERVER_HOST);
                     String siteProtocol = settingManager.getValue(Settings.SYSTEM_SERVER_PROTOCOL);
-
+                    
                     // some conditional logic to handle the case where there's no port in the settings
                     SettingInfo si = new SettingInfo();
-                    int sitePort = si.getSitePort();
+                    int sitePort = si.getSitePort(); 
 
                     if (!hostName.equalsIgnoreCase(siteHost) ||
-                            !protocol.equalsIgnoreCase(siteProtocol) ||
-                            port != sitePort) {
+                        !protocol.equalsIgnoreCase(siteProtocol) ||
+                        port != sitePort) {
                         urlPatternValue = getDefaultTargetUrl();
                     }
                 } catch (MalformedURLException e) {

@@ -982,13 +982,6 @@ public class MetadataInsertDeleteApi {
             metadataValidator.doValidate(metadata, context.getLanguage());
         }
 
-        if (rejectIfInvalid) {
-            // Persist the validation status
-            AbstractMetadata metadata = metadataRepository.findOneById(iId);
-
-            metadataValidator.doValidate(metadata, context.getLanguage());
-        }
-
         dataManager.indexMetadata(id.get(0), true);
         return Pair.read(Integer.valueOf(id.get(0)), uuid);
     }
@@ -1006,24 +999,6 @@ public class MetadataInsertDeleteApi {
             // Is the user profile is higher than the profile allowed to import metadata?
             if (!UserUtil.hasHierarchyRole(allowedUserProfileToImportMetadata, this.roleHierarchy)) {
                 throw new NotAllowedException("The user has no permissions to import metadata.");
-            }
-        }
-
-    }
-
-    /**
-     * Checks if the user profile is allowed to import metadata.
-     *
-     * @param userSession
-     */
-    private void checkUserProfileToDeletePublishedMetadata(UserSession userSession) {
-        if (userSession.getProfile() != Profile.Administrator) {
-            String allowedUserProfileToImportMetadata =
-                StringUtils.defaultIfBlank(settingManager.getValue(Settings.METADATA_PUBLISHED_DELETE_USERPROFILE), Profile.Editor.toString());
-
-            // Is the user profile is higher than the profile allowed to import metadata?
-            if (!hasHierarchyRole(allowedUserProfileToImportMetadata, this.roleHierarchy)) {
-                throw new NotAllowedException("The user has no permissions to delete published metadata.");
             }
         }
 

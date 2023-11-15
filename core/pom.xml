@@ -128,18 +128,6 @@
       <artifactId>log4j-core</artifactId>
       <version>${log4j2.version}</version>
     </dependency>
-    <!-- bridge java util logging api based on logging.properties -->
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-jul</artifactId>
-      <version>${log4j2.version}</version>
-    </dependency>
-    <!-- bridge slf4j api for testig wtih apacheds -->
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-slf4j-impl</artifactId>
-      <scope>test</scope>
-    </dependency>
     <!-- log4j 2 logging configured via log4j2.xml -->
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
@@ -455,18 +443,9 @@
       <artifactId>openpdf</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.github.librepdf</groupId>
-      <artifactId>openpdf</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.mapfish.print</groupId>
       <artifactId>print-lib</artifactId>
       <exclusions>
-        <exclusion>
-          <!-- provided by openpdf -->
-          <groupId>com.itextpdf</groupId>
-          <artifactId>itextpdf</artifactId>
-        </exclusion>
         <exclusion>
           <!-- provided by openpdf -->
           <groupId>com.itextpdf</groupId>

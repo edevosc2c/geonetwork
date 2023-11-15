@@ -183,7 +183,8 @@
 
   module.filter("facetTranslator", [
     "$translate",
-   "$filter", function ($translate, $filter) {
+    "$filter",
+    function ($translate, $filter) {
       return function (input, facetKey) {
         if (!input || angular.isObject(input)) {
           return input;
@@ -206,8 +207,9 @@
         if (facetKey === "statusWorkflow") {
           translation = $filter("getStatusLabel")(input);
         } else {
-          translation =$translate.instant(translationId);
-        }if (translation !== translationId) {
+          translation = $translate.instant(translationId);
+        }
+        if (translation !== translationId) {
           return translation;
         } else {
           // A common translations ?
@@ -864,7 +866,10 @@
               scope.vl.view.addEventListener("click", function (event, item) {
                 if (item.datum && item.datum.$$hashKey) {
                   $timeout(function () {
-                    scope.updateCallback({ facet: scope.facet, item: item.datum });
+                    scope.updateCallback({
+                      facet: scope.facet,
+                      item: item.datum
+                    });
                   }, 10);
                 }
               });

@@ -43,7 +43,6 @@ import org.fao.geonet.kernel.harvest.BaseAligner;
 import org.fao.geonet.kernel.harvest.harvester.*;
 import org.fao.geonet.kernel.mef.*;
 import org.fao.geonet.kernel.search.IndexingMode;
-import org.fao.geonet.kernel.search.IndexingMode;
 import org.fao.geonet.kernel.setting.SettingManager;
 import org.fao.geonet.kernel.setting.Settings;
 import org.fao.geonet.repository.GroupRepository;

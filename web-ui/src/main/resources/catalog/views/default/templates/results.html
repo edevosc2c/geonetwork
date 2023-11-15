@@ -118,7 +118,7 @@
               data-template-url="resultTemplate"
               data-map="searchObj.searchMap"
             ></div>
-</div>
+          </div>
         </div>
         <div class="row gn-row-tools gn-noborder-bottom hidden-print">
           <div class="col-sm-3">
@@ -127,9 +127,10 @@
               class="btn btn-link hidden-print"
               onClick="window.scrollTo(0,0);"
               title="{{'scrollTop' | translate}}"
-
-              ><i class="fa fa-fw fa-chevron-up" />
-            </button></div>
+            >
+              <i class="fa fa-fw fa-chevron-up" />
+            </button>
+          </div>
           <div class="col-xs-12 col-sm-6 text-center">
             <div
               class=""
@@ -143,7 +144,7 @@
       </div>
     </div>
 
-    <div ng-if="searchMapPlacement === 'results'" class="hidden-print" class="hidden-print">
+    <div ng-if="searchMapPlacement === 'results'" class="hidden-print">
       <div
         data-gn-map-field="searchObj.searchMap"
         data-gn-map-field-geom="searchObj.params.geometry"

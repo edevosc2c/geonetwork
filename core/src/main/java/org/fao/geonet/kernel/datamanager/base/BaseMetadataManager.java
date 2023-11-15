@@ -49,7 +49,6 @@ import org.fao.geonet.kernel.schema.MetadataSchema;
 import org.fao.geonet.kernel.schema.SchemaPlugin;
 import org.fao.geonet.kernel.search.EsSearchManager;
 import org.fao.geonet.kernel.search.IndexingMode;
-import org.fao.geonet.kernel.search.IndexingMode;
 import org.fao.geonet.kernel.search.index.BatchOpsMetadataReindexer;
 import org.fao.geonet.kernel.setting.SettingManager;
 import org.fao.geonet.kernel.setting.Settings;
@@ -742,7 +741,8 @@ public class BaseMetadataManager implements IMetadataManager {
             session.removeProperty(Geonet.Session.VALIDATION_REPORT + metadataId);
         }
         String schema = metadataSchemaUtils.getMetadataSchema(metadataId);
-final AbstractMetadata metadata = metadataUtils.findOne(metadataId);
+
+        final AbstractMetadata metadata = metadataUtils.findOne(metadataId);
 
         if (updateDateStamp) {
             if (StringUtils.isEmpty(changeDate)) {
@@ -752,6 +752,7 @@ final AbstractMetadata metadata = metadataUtils.findOne(metadataId);
                 metadata.getDataInfo().setChangeDate(new ISODate(changeDate));
             }
         }
+
         String uuidBeforeUfo = null;
         if (ufo) {
             String parentUuid = null;

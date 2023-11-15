@@ -1167,7 +1167,7 @@
                 "fields": {
                   "keyword": {
                     "type": "keyword",
-                    "ignore_above": 256
+                    "ignore_above": ${es.index.ignore_above}
                   }
                 }
               },
@@ -1298,6 +1298,10 @@
                 "copy_to": [
                   "any.langdut"
                 ]
+              },
+              "langdut": {
+                "type": "keyword",
+                "copy_to": ["any.langger"]
               },
               "langdut": {
                 "type": "keyword",
@@ -1536,14 +1540,17 @@
           },
           "langdut": {
             "type": "keyword",
+            "copy_to": ["any.langger"]
+          },
+          "langdut": {
+            "type": "keyword",
             "copy_to": [
               "any.langdut"
               ]
           },
           "langdut": {
             "type": "keyword",
-            "copy_to": [
-              "any.langdut"
+            "copy_to": ["any.langdut"
               ]
           },
           "langita": {
@@ -1820,6 +1827,14 @@
       },
       "resourceType": {
         "type": "keyword"
+      },
+      "resourceTypeNameObject": {
+        "type": "object",
+        "properties": {
+          "default": {
+            "type": "keyword"
+          }
+        }
       },
       "resourceTypeNameObject": {
         "type": "object",

@@ -301,11 +301,6 @@ public class DoiManager {
                 .withDescriptionKey("exception.doi.missingSavedquery.description",
                     new String[]{ metadata.getUuid(), schema.getName(),
                     SavedQuery.DOI_GET, e.getMessage(),
-                    schema.getName() })
-                .withMessageKey("exception.doi.missingSavedquery")
-                .withDescriptionKey("exception.doi.missingSavedquery.description",
-                    new String[]{ metadata.getUuid(), schema.getName(),
-                    DOI_GET_SAVED_QUERY, e.getMessage(),
                     schema.getName() });
         }
     }

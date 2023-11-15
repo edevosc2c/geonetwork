@@ -100,7 +100,8 @@
               type: "danger"
             });
             loadLogo();
-          });
+          }
+        );
       };
 
       /**

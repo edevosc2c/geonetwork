@@ -108,6 +108,7 @@
         var http = $http.get($scope.options.printConfigUrl);
         http.then(function (response) {
           var data = response.data;
+
           $scope.capabilities = data;
 
           // default values:

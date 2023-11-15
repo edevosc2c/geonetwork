@@ -110,8 +110,6 @@ public class LocalXLinksInMetadataIntegrationTest extends AbstractIntegrationTes
         String id = _dataManager.insertMetadata(context, schema, metadata, uuid, owner, groupOwner, source, metadataType, null,
             null, createDate, changeDate, false, IndexingMode.none);
 
-        SpringLocalServiceInvoker mockInvoker = resetAndGetMockInvoker();
-
         String keyword1 = "World";
         Element element1 = new SAXBuilder().build(new StringReader(String.format(responseTemplate, keyword1))).getRootElement();
         when(springLocalServiceInvoker.invoke(any(String.class))).thenReturn(element1);

@@ -324,7 +324,7 @@
                     select="gn-fn-metadata:check-elementandsession-visibility(
                   $schema, $base, $serviceInfo, @if, @displayIfServiceInfo)"/>
 
-      <!--
+      <!-- 
       <xsl:message> Field: <xsl:value-of select="@name"/></xsl:message>
       <xsl:message>Xpath: <xsl:copy-of select="@xpath"/></xsl:message>
       <xsl:message>TemplateModeOnly: <xsl:value-of select="@templateModeOnly"/></xsl:message>

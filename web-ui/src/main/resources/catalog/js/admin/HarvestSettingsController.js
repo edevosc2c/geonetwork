@@ -240,14 +240,14 @@
         $http
           .get("admin.harvester.info?_content_type=json&type=harvesterTypes", {
             cache: true
-
           })
-          .then(function (response) {
-            angular.forEach(response.data[0], function (value) {
-              $scope.harvesterTypes[value] = {
-                type: value,
-                label: "harvester-" + value
-              };
+          .then(
+            function (response) {
+              angular.forEach(response.data[0], function (value) {
+                $scope.harvesterTypes[value] = {
+                  type: value,
+                  label: "harvester-" + value
+                };
 
                 $.getScript("../../catalog/templates/admin/harvest/type/" + value + ".js")
                   .done(function (script, textStatus) {
@@ -409,18 +409,21 @@
             function (response) {
               deferred.reject(response.data);
               $rootScope.$broadcast("StatusUpdated", {
-              msg: $translate.instant("harvesterUpdated"),
-              error: response.data,
-              timeout: 2,
-              type: "danger"
-            });
-          });
+                msg: $translate.instant("harvesterUpdated"),
+                error: response.data,
+                timeout: 2,
+                type: "danger"
+              });
+            }
+          );
 
         return deferred.promise;
       };
 
-      $scope.selectHarvester = function (h) {$scope.activeTab.settings = true;
+      $scope.selectHarvester = function (h) {
+        $scope.activeTab.settings = true;
         $scope.setSimpleUrlPagination();
+
         // TODO: Specific to thredds
         if (h["@type"] === "thredds") {
           $scope.threddsCollectionsMode =
@@ -468,25 +471,26 @@
       };
 
       $scope.deleteHarvester = function () {
-              $scope.deleting.push($scope.harvesterSelected["@id"]);
-              return $http
-                .get(
-                  "admin.harvester.remove?_content_type=json&id=" +
-                    $scope.harvesterSelected["@id"]
-                )
-                .success(function (data) {
-                  $scope.harvesterSelected = {};
-                  $scope.harvesterUpdated = false;
-                  $scope.harvesterNew = false;
-                  $scope.$parent.loadHarvesters();
-                })
-                .error(function (data) {
-                  console.log(data);
-                })
-                .then(function () {
-                  $scope.deleting.splice($scope.deleting.indexOf(3), 1);
-                });
-            };
+        $scope.deleting.push($scope.harvesterSelected["@id"]);
+        return $http
+          .get(
+            "admin.harvester.remove?_content_type=json&id=" +
+              $scope.harvesterSelected["@id"]
+          )
+          .then(
+            function (response) {
+              $scope.harvesterSelected = {};
+              $scope.harvesterUpdated = false;
+              $scope.harvesterNew = false;
+              $scope.$parent.loadHarvesters();
+
+              $scope.deleting.splice($scope.deleting.indexOf(3), 1);
+            },
+            function (response) {
+              console.log(response.data);
+            }
+          );
+      };
 
       $scope.deleteHarvesterRecord = function () {
         return $http
@@ -530,7 +534,6 @@
         return $http
           .get(
             "admin.harvester.history.delete?uuid=" + $scope.harvesterSelected.site.uuid
-
           )
           .then(function (response) {
             $scope.$parent.loadHarvesters().then(function () {
@@ -542,7 +545,6 @@
         return $http
           .get(
             "admin.harvester.run?_content_type=json&id=" + $scope.harvesterSelected["@id"]
-
           )
           .then(function (response) {
             $scope.$parent.loadHarvesters().then(function () {
@@ -559,7 +561,6 @@
           .get("admin.harvester.stop?_content_type=json&id=" + id + "&status=" + status)
           .then(function () {
             $scope.$parent.loadHarvesters().then(refreshSelectedHarvester);
-
             $scope.stopping = false;
           });
       };
@@ -709,24 +710,26 @@
           .get($scope.proxyUrl + encodeURIComponent(url + "/srv/eng/info?type=sources"))
           .then(
             function (response) {
-            $scope.geonetworkSources = [];
-            var i = 0;
-            var xmlDoc = $.parseXML(response.data);
-            var $xml = $(xmlDoc);
-            $sources = $xml.find("uuid");
-            $names = $xml.find("name");
+              $scope.geonetworkSources = [];
+              var i = 0;
+              var xmlDoc = $.parseXML(response.data);
+              var $xml = $(xmlDoc);
+              $sources = $xml.find("uuid");
+              $names = $xml.find("name");
 
-            angular.forEach($sources, function (s) {
-              // FIXME: probably some issue on IE ?
-              $scope.geonetworkSources.push({
-                uuid: s.textContent,
-                name: $names[i].textContent
+              angular.forEach($sources, function (s) {
+                // FIXME: probably some issue on IE ?
+                $scope.geonetworkSources.push({
+                  uuid: s.textContent,
+                  name: $names[i].textContent
+                });
+                i++;
               });
-              i++;
-            });
-          },function (response) {
-            // TODO
-          });
+            },
+            function (response) {
+              // TODO
+            }
+          );
       };
 
       // OGCWxS
@@ -929,8 +932,7 @@
               "SERVICE=CSW&REQUEST=GetCapabilities&VERSION=2.0.2";
           }
 
-          $http
-            .get($scope.proxyUrl + encodeURIComponent(url)).then(
+          $http.get($scope.proxyUrl + encodeURIComponent(url)).then(
             function (response) {
               $scope.cswCriteria = [];
 

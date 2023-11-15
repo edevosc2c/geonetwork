@@ -26,14 +26,12 @@
 
   goog.require("gn_catalog_service");
   goog.require("gn_searchsuggestion_service");
-  goog.require("gn_static_pages");
   goog.require("gn_usersearches");
 
   var module = angular.module("gn_search_controller", [
     "ui.bootstrap.typeahead",
     "gn_searchsuggestion_service",
     "gn_catalog_service",
-    "gn_static_pages",
     "gn_usersearches"
   ]);
 
@@ -161,7 +159,8 @@
         promise: (function () {
           var defer = $q.defer();
           $http.get("../api/tags", { cache: true }).then(function (response) {
-            var res = [];var data = response.data;
+            var res = [];
+            var data = response.data;
             for (var i = 0; i < data.length; i++) {
               res.push({
                 id: data[i].name,

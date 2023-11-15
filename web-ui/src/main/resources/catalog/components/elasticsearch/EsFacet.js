@@ -258,7 +258,9 @@
           return gnEsLanguageService.injectLanguage(field, languageConfig, false);
         }
         return undefined;
-      };this.addFacets = function (esParams, type, languageConfig) {
+      };
+
+      this.addFacets = function (esParams, type, languageConfig) {
         var esFacet = this,
           aggs =
             typeof type === "string" ? angular.copy(this.configs[type].facets, {}) : type;
@@ -318,9 +320,10 @@
         }
         var source = typeof type === "string" ? this.configs[type].source : type;
         esParams._source = source;
-if (this.configs[type].script_fields) {
+        if (this.configs[type].script_fields) {
           esParams.script_fields = this.configs[type].script_fields;
         }
+
         // By default limit to 10000.
         // Set to true will be a bit slower
         // See https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html#request-body-search-track-total-hits
@@ -369,8 +372,9 @@ if (this.configs[type].script_fields) {
             meta: respAgg.meta,
             config: reqAgg,
             items: [],
-            path: (path || []).concat([respAgg.meta && respAgg.meta.field ? respAgg.meta.field : searchFieldId
-          ])
+            path: (path || []).concat([
+              respAgg.meta && respAgg.meta.field ? respAgg.meta.field : searchFieldId
+            ])
           };
 
           if (reqAgg.hasOwnProperty("terms")) {

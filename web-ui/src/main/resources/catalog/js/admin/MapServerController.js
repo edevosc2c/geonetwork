@@ -123,14 +123,15 @@
           .post("../api/mapservers/" + $scope.mapserverSelected.id + "/auth", data, {
             headers: { "Content-Type": "application/x-www-form-urlencoded" }
           })
-          .then(function (response) {
+          .then(
+            function (response) {
               $scope.resetPassword = null;
               $("#passwordResetModal").modal("hide");
-            },function (response) {
+            },
+            function (response) {
               // TODO
             }
           );
-      };
       };
 
       $scope.deleteMapserverConfig = function () {
@@ -138,8 +139,7 @@
       };
 
       $scope.confirmDeleteMapserverConfig = function () {
-        $http
-          .delete("../api/mapservers/" + $scope.mapserverSelected.id).then(
+        $http.delete("../api/mapservers/" + $scope.mapserverSelected.id).then(
           function (response) {
             loadMapservers();
           },

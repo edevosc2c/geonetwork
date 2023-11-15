@@ -276,15 +276,16 @@
                   setStatus({ msg: "saveMetadataError", saving: false });
                 }
 
-              gnCurrentEdit.working = false;
+                gnCurrentEdit.working = false;
 
-              // Error is returned in XML format, convert it to JSON
-              var x2js = new X2JS();
-              var errorJson = x2js.xml_str2json(error);
+                // Error is returned in XML format, convert it to JSON
+                var x2js = new X2JS();
+                var errorJson = x2js.xml_str2json(error);
 
-              defer.reject(errorJson.apiError);
-            }
-          );return defer.promise;
+                defer.reject(errorJson.apiError);
+              }
+            );
+          return defer.promise;
         },
         /**
          * Cancel the changes
@@ -473,26 +474,26 @@
                 "&name=" +
                 name +
                 attributeAction
-
             )
-            .then(function (response) {
-              // Append HTML snippet after current element - compile Angular
-              var target = $("#gn-el-" + insertRef);
-              var snippet = $(cleanData(response.data));
+            .then(
+              function (response) {
+                // Append HTML snippet after current element - compile Angular
+                var target = $("#gn-el-" + insertRef);
+                var snippet = $(cleanData(response.data));
 
-              if (attribute) {
-                target.replaceWith(snippet);
-              } else {
-                // If the element was a add button
-                // without any existing element, the
-                // gn-extra-field indicating a not first field
-                // was not set. After add, set the css class.
-                if (target.hasClass("gn-add-field")) {
-                  target.addClass("gn-extra-field");
-                }
-                snippet.css("display", "none"); // Hide
-                target[position || "after"](snippet); // Insert
-                snippet.slideDown(duration, function () {}); // Slide
+                if (attribute) {
+                  target.replaceWith(snippet);
+                } else {
+                  // If the element was a add button
+                  // without any existing element, the
+                  // gn-extra-field indicating a not first field
+                  // was not set. After add, set the css class.
+                  if (target.hasClass("gn-add-field")) {
+                    target.addClass("gn-extra-field");
+                  }
+                  snippet.css("display", "none"); // Hide
+                  target[position || "after"](snippet); // Insert
+                  snippet.slideDown(duration, function () {}); // Slide
 
                   // Adapt the add & move element
                   checkAddControls(snippet);
@@ -522,25 +523,27 @@
                 "&child=" +
                 name
             )
-            .then(function (response) {
-              // Append HTML snippet after current element - compile Angular
-              var target = $("#gn-el-" + insertRef);
-              var snippet = $(cleanData(response.data));
+            .then(
+              function (response) {
+                // Append HTML snippet after current element - compile Angular
+                var target = $("#gn-el-" + insertRef);
+                var snippet = $(cleanData(response.data));
 
-              if (target.hasClass("gn-add-field")) {
-                target.addClass("gn-extra-field");
-              }
-              snippet.css("display", "none"); // Hide
-              target[position || "before"](snippet); // Insert
-              snippet.slideDown(duration, function () {}); // Slide
+                if (target.hasClass("gn-add-field")) {
+                  target.addClass("gn-extra-field");
+                }
+                snippet.css("display", "none"); // Hide
+                target[position || "before"](snippet); // Insert
+                snippet.slideDown(duration, function () {}); // Slide
 
-              checkAddControls(snippet);
-              checkMoveControls(snippet);
+                checkAddControls(snippet);
+                checkMoveControls(snippet);
 
-              $compile(snippet)(gnCurrentEdit.formScope);
-              defer.resolve(snippet);
-            },function (response) {
-              defer.reject(response.data);
+                $compile(snippet)(gnCurrentEdit.formScope);
+                defer.resolve(snippet);
+              },
+              function (response) {
+                defer.reject(response.data);
               }
             );
           return defer.promise;
@@ -559,57 +562,57 @@
                 gnCurrentEdit.displayAttributes +
                 "&parent=" +
                 parent
-
             )
-            .then(function (response) {
-              // For a fieldset, domref is equal to ref.
-              // For an input, it may be different because
-              // the element to remove is the parent of the input
-              // element (eg. gmd:voice for a gco:CharacterString)
-              domRef = domRef || ref;
-              // The element to remove from the DOM
-              var target = $("#gn-el-" + domRef);
+            .then(
+              function (response) {
+                // For a fieldset, domref is equal to ref.
+                // For an input, it may be different because
+                // the element to remove is the parent of the input
+                // element (eg. gmd:voice for a gco:CharacterString)
+                domRef = domRef || ref;
+                // The element to remove from the DOM
+                var target = $("#gn-el-" + domRef);
 
-              // When adding a new element, the down control
-              // of the previous element must be enabled and
-              // the up control enabled only if the previous
-              // element is not on top.
-              var checkMoveControls = function (element) {
-                // If first element with down only
-                //  apply this to the next one
-                var isFirst = isFirstElementOfItsKind(element);
-                if (isFirst) {
-                  var next = $(element).next().get(0);
-                  var elementCtrl = $(next).find("div.gn-move").get(0);
-                  var ctrl = $(elementCtrl).children();
-                  $(ctrl.get(0)).addClass("invisible");
-
-                  if ($(next).hasClass("gn-extra-field")) {
-                    $(next).removeClass("gn-extra-field");
-                  }
-                } else {
-                  // If middle element with up and down
-                  // do nothing
-
-                  // If last element with up only
-                  //  apply this to previous
-                  var isLast = isLastElementOfItsKind(element);
-                  if (isLast) {
-                    var prev = $(element).prev().get(0);
-                    var elementCtrl = $(prev).find("div.gn-move").get(0);
+                // When adding a new element, the down control
+                // of the previous element must be enabled and
+                // the up control enabled only if the previous
+                // element is not on top.
+                var checkMoveControls = function (element) {
+                  // If first element with down only
+                  //  apply this to the next one
+                  var isFirst = isFirstElementOfItsKind(element);
+                  if (isFirst) {
+                    var next = $(element).next().get(0);
+                    var elementCtrl = $(next).find("div.gn-move").get(0);
                     var ctrl = $(elementCtrl).children();
-                    $(ctrl.get(1)).addClass("invisible");
+                    $(ctrl.get(0)).addClass("invisible");
 
-                    var next = $(element).next();
-                    if (next.hasClass("gn-add-field")) {
-                      next.removeClass("gn-extra-field");
+                    if ($(next).hasClass("gn-extra-field")) {
+                      $(next).removeClass("gn-extra-field");
+                    }
+                  } else {
+                    // If middle element with up and down
+                    // do nothing
+
+                    // If last element with up only
+                    //  apply this to previous
+                    var isLast = isLastElementOfItsKind(element);
+                    if (isLast) {
+                      var prev = $(element).prev().get(0);
+                      var elementCtrl = $(prev).find("div.gn-move").get(0);
+                      var ctrl = $(elementCtrl).children();
+                      $(ctrl.get(1)).addClass("invisible");
+
+                      var next = $(element).next();
+                      if (next.hasClass("gn-add-field")) {
+                        next.removeClass("gn-extra-field");
+                      }
                     }
                   }
-                }
-              };
+                };
 
-              checkAddControls(target.get(0), true);
-              checkMoveControls(target.get(0));
+                checkAddControls(target.get(0), true);
+                checkMoveControls(target.get(0));
 
                 target.slideUp(duration);
                 target.promise().done(function () {

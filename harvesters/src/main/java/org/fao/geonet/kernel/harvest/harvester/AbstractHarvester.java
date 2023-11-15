@@ -26,7 +26,6 @@ package org.fao.geonet.kernel.harvest.harvester;
 import jeeves.server.UserSession;
 import jeeves.server.context.ServiceContext;
 import org.apache.commons.lang.StringUtils;
-import org.apache.logging.log4j.ThreadContext;
 import org.fao.geonet.Logger;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.csw.common.exceptions.InvalidParameterValueEx;
@@ -606,6 +605,7 @@ public abstract class AbstractHarvester<T extends HarvestResult, P extends Abstr
                 cancelMonitor.set(false);
                 try {
                     String logfile = LogUtil.initializeHarvesterLog(getType(), this.getParams().getName());
+
                     this.log.info("Starting harvesting of " + this.getParams().getName());
                     error = null;
                     errors.clear();

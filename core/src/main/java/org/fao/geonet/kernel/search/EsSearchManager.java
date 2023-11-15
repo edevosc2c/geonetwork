@@ -212,7 +212,7 @@ public class EsSearchManager implements ISearchManager {
                              IndexingMode indexingMode) {
         final Path styleSheet = getXSLTForIndexing(schemaDir, metadataType);
         try {
-            Map<String, Object> indexParams = new HashMap<String, Object>();
+            Map<String, Object> indexParams = new HashMap<>();
             indexParams.put("fastIndexMode", indexingMode.equals(IndexingMode.core));
 
             Element fields = Xml.transform(metadata, styleSheet, indexParams);

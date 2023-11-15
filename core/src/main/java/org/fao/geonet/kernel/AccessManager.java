@@ -23,7 +23,6 @@
 
 package org.fao.geonet.kernel;
 
-import static org.fao.geonet.kernel.setting.Settings.SYSTEM_METADATAPRIVS_PUBLICATIONBYGROUPOWNERONLY;
 import jeeves.server.UserSession;
 import jeeves.server.context.ServiceContext;
 import org.apache.commons.lang.StringUtils;

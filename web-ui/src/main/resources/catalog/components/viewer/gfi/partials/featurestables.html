@@ -9,7 +9,8 @@
 
   <ul class="nav nav-tabs" data-ng-show="ctrl.tables.length > 1">
     <li
-      data-ng-repeat="table in ctrl.tables"data-ng-show="table.loader.getCount() > 0"
+      data-ng-repeat="table in ctrl.tables"
+      data-ng-show="table.loader.getCount() > 0"
       data-ng-class="{active: table == ctrl.currentTable}"
     >
       <a role="tab" data-ng-click="ctrl.currentTable = table" title="{{::table.name}}">

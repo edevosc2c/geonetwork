@@ -37,16 +37,17 @@
       </span>
       <span
         ng-if="::!specific && filter.label === undefined && type === undefined"
-        ng-repeat="(key, value) in filter.value track by $index"ng-init="type = getFilterType({value: value})"
+        ng-repeat="(key, value) in filter.value track by $index"
+        ng-init="type = getFilterType({value: value})"
         ng-class="{'gn-filter-negative': isNegative(value)}"
-        >
+      >
         <span ng-if="::type === 'RANGE'">
           {{::value | renderRangeExpression:filter.key}}
         </span>
         <span ng-if="::type !== 'RANGE'">
           {{::key | facetTranslator: filter.key | capitalize}}
-        </span></span
-      >
+        </span>
+      </span>
       <!-- TODO: Nested aggs support -->
       <div class="flex-grow"></div>
       <span class="fa fa-times text-danger delete-icon pull-right"></span>

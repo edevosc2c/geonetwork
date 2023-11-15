@@ -186,11 +186,9 @@
 
       function loadUsers() {
         $scope.isLoadingUsers = true;
-        $http
-          .get("../api/users")
-          .then(function (response) {
+        $http.get("../api/users").then(
+          function (response) {
             $scope.users = response.data;
-
             $scope.isLoadingUsers = false;
 
             // Search if requested user in location is
@@ -292,30 +290,30 @@
         $scope.userSelected = null;
         $scope.userGroups = null;
 
-        $http
-          .get("../api/users/" + u.id).then(
+        $http.get("../api/users/" + u.id).then(
           function (response) {
             var data = response.data;
+
             $scope.userSelected = data;
             $scope.userIsAdmin = data.profile === "Administrator";
 
             $scope.userIsEnabled = data.enabled;
 
             // Load user group and then select user
-            $http
-              .get("../api/users/" + u.id + "/groups").then(
+            $http.get("../api/users/" + u.id + "/groups").then(
               function (response) {
                 $scope.userGroups = response.data;
               },
               function (response) {
                 // TODO
               }
-          )
-          ;
-          },function (response) {
+            );
+          },
+          function (response) {
             // TODO
           }
-);
+        );
+
         // Retrieve records in that group
         $scope.$broadcast("resetSearch", {
           isTemplate: ["y", "n", "s", "t"],
@@ -618,8 +616,7 @@
        * Remove the user and refresh the list when done.
        */
       $scope.confirmRemoveUser = function () {
-        $http
-          .delete("../api/users/" + $scope.userSelected.id).then(
+        $http.delete("../api/users/" + $scope.userSelected.id).then(
           function (response) {
             $rootScope.$broadcast("StatusUpdated", {
               msg: $translate.instant("userRemoved"),
@@ -715,7 +712,6 @@
             "../api/groups" +
               ($scope.groupSelected.id != -99 ? "/" + $scope.groupSelected.id : ""),
             $scope.groupSelected
-
           )
           .then(createOrModifyGroupSuccess, createOrModifyGroupError);
       };
@@ -761,8 +757,7 @@
        * Remove the group and refresh the list when done.
        */
       $scope.confirmRemoveGroup = function () {
-        $http
-          .delete("../api/groups/" + $scope.groupSelected.id + "?force=true").then(
+        $http.delete("../api/groups/" + $scope.groupSelected.id + "?force=true").then(
           function (response) {
             $rootScope.$broadcast("StatusUpdated", {
               msg: $translate.instant("groupRemoved"),

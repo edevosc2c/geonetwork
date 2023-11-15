@@ -132,7 +132,9 @@
             hits &&
               hits.map &&
               hits.map(function (h) {
-                var overview = h.overview || (h._source && h._source.overview)||
+                var overview =
+                  h.overview ||
+                  (h._source && h._source.overview) ||
                   (h.fields && h.fields.overview);
                 if (overview) {
                   scope.images = scope.images.concat(overview);
@@ -993,7 +995,8 @@
                   function () {
                     deferred.resolve();
                   },
-                  function () {
+                  function (r) {
+                    console.warn(r);
                     deferred.reject();
                   }
                 );
@@ -1296,37 +1299,6 @@
         },
         link: function (scope, element, attrs) {
           scope.onlinesrcService = gnOnlinesrc;
-        }
-      };
-    }
-  ]);
-
-  module.directive("gnLinkIcon", [
-    "gnRelatedResources",
-    function (gnRelatedResources) {
-      return {
-        restrict: "A",
-        templateUrl: "../../catalog/components/utility/" + "partials/linkicon.html",
-        scope: {
-          link: "=gnLinkIcon",
-          mode: "@"
-        },
-        link: function (scope, element, attrs) {
-          scope.mainType = gnRelatedResources.getType(scope.link, null);
-          scope.badge = gnRelatedResources.getBadgeLabel(scope.mainType, scope.link);
-
-          scope.mimeTypeIconClass = scope.link.mimeType
-            ? "gn-icon-" + scope.link.mimeType
-            : "";
-          scope.protocolIconClass = scope.link.protocol
-            ? "gn-icon-" +
-              scope.link.protocol.replace(":", "-").replace(" ", "-").toLowerCase()
-            : "";
-          scope.typeIconClass = gnRelatedResources.getClassIcon(scope.mainType);
-
-          scope.typeClass =
-            "gn-icontype-" +
-            scope.mainType.replace(":", "-").replace(" ", "-").toLowerCase();
         }
       };
     }
@@ -2400,7 +2372,7 @@
                   '  <button type=button class="btn btn-danger gn-btn-modal-img">' +
                   '<i class="fa fa-times"/></button>' +
                   '  <img src="' +
-                  (attr.ngSrc ||img.lUrl || img.url || img.id) +
+                  (attr.ngSrc || img.lUrl || img.url || img.id) +
                   '"/>' +
                   (label != "" ? labelDiv : "") +
                   "</div>" +

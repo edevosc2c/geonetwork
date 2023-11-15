@@ -125,9 +125,6 @@ public class Thesaurus {
     private Cache<String, Object> THESAURUS_SEARCH_CACHE;
 
 
-    private Cache<String, Object> THESAURUS_SEARCH_CACHE;
-
-
     /**
      * Available for subclasses.
      */

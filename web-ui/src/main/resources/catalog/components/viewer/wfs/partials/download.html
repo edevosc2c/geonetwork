@@ -44,34 +44,41 @@
     <div data-ng-if="mode == 'dropdown'">
       <div data-ng-repeat="type in featureTypes">
         <button
-        type="button"
-        class="btn btn-default btn-sm dropdown-toggle"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-
+          type="button"
+          class="btn btn-default btn-sm dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
         >
           <i class="fa fa-fw fa-download"></i>
           <span data-translate="">downloadFeature</span>
           <span>{{type.label}}</span>
           <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu">
-        <li class="dropdown-header" data-translate="">downloadAllIn</li>
-        <li data-ng-repeat="f in formats | orderBy:f track by $index">
-          <a data-gn-click-and-spin="downloadFeatureType(type.type, type.label, f)"
-              title="{{f}}"> {{f | lowercase| translate}} </a>
-        </li>
-        <li data-ng-if="map" role="separator" class="divider"></li>
-        <li class="dropdown-header" data-ng-if="map" data-translate="">
-          downloadInCurrentMapExtent
-        </li>
-        <li data-ng-if="map" data-ng-repeat="f in formats | orderBy:f track by $index">
-          <a data-gn-click-and-spin="downloadFeatureType(type.type, type.label, f, true)"
+        </button>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header" data-translate="">downloadAllIn</li>
+          <li data-ng-repeat="f in formats | orderBy:f track by $index">
+            <a
+              data-gn-click-and-spin="downloadFeatureType(type.type, type.label, f)"
               title="{{f}}"
-            > {{f | lowercase | translate}} </a>
-        </li>
-      </ul></div>
+            >
+              {{f | lowercase | translate}}
+            </a>
+          </li>
+          <li data-ng-if="map" role="separator" class="divider"></li>
+          <li class="dropdown-header" data-ng-if="map" data-translate="">
+            downloadInCurrentMapExtent
+          </li>
+          <li data-ng-if="map" data-ng-repeat="f in formats | orderBy:f track by $index">
+            <a
+              data-gn-click-and-spin="downloadFeatureType(type.type, type.label, f, true)"
+              title="{{f}}"
+            >
+              {{f | lowercase | translate}}
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
   <div
@@ -124,8 +131,8 @@
             <li data-ng-if="map" data-ng-repeat="format in formats | orderBy:f">
               <a
                 data-gn-click-and-spin="downloadFeatureType(ftSelected,
-                 ftSelected.name.prefix + ':' + ftSelected.name.localPart, true)"
-
+                 ftSelected.name.prefix + ':' + ftSelected.name.localPart,
+                  true)"
               >
                 {{format | lowercase | translate}}
               </a>

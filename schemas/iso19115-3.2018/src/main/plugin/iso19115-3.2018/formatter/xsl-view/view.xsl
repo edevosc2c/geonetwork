@@ -192,7 +192,8 @@
                   <span class="badge"><xsl:copy-of select="."/></span>
                 </xsl:when>
                 <xsl:otherwise>
-                  <a class="btn btn-default btn-xs"href='#/search?query_string=%7B"tag.\\*":%7B"{.}":true%7D%7D'>
+                  <a class="btn btn-default btn-xs"
+                     href='#/search?query_string=%7B"tag.\\*":%7B"{.}":true%7D%7D'>
                     <xsl:copy-of select="."/>
                   </a>
                 </xsl:otherwise>
@@ -200,8 +201,7 @@
             </xsl:for-each>
           </xsl:otherwise>
         </xsl:choose>
-  </section>
-    </xsl:if>
+      </section>
     </xsl:if>
   </xsl:template>
 
@@ -257,18 +257,19 @@
         <xsl:for-each select="mdb:identificationInfo/*/mri:graphicOverview/*">
           <div>
             <img data-gn-img-modal="md"
-               class="gn-img-thumbnail center-block"
-               alt="{$schemaStrings/overview}"
-               src="{mcc:fileName/*}"onerror="{$imgOnError}"/>
+                 class="gn-img-thumbnail center-block"
+                 alt="{$schemaStrings/overview}"
+                 src="{mcc:fileName/*}"
+                 onerror="{$imgOnError}"/>
 
-          <xsl:for-each select="mcc:fileDescription">
-            <div class="gn-img-thumbnail-caption">
-              <xsl:call-template name="get-iso19115-3.2018-localised">
-                <xsl:with-param name="langId" select="$langId"/>
-              </xsl:call-template>
-            </div>
-          </xsl:for-each>
-        </div>
+            <xsl:for-each select="mcc:fileDescription">
+              <div class="gn-img-thumbnail-caption">
+                <xsl:call-template name="get-iso19115-3.2018-localised">
+                  <xsl:with-param name="langId" select="$langId"/>
+                </xsl:call-template>
+              </div>
+            </xsl:for-each>
+          </div>
         </xsl:for-each>
       </section>
     </xsl:if>
@@ -318,7 +319,7 @@
       select="mdb:identificationInfo/*/mri:citation/*/cit:otherCitationDetails"/>
       -->
       <xsl:choose>
-      <!-- Landing page case -->
+        <!-- Landing page case -->
         <xsl:when test="$language = 'all'">
 
           <xsl:variable name="citationInfo">

@@ -211,6 +211,17 @@ public class GeonetworkDataDirectory {
     }
 
     /**
+     * Logfile location as determined from appender, or system property, or default.
+     * <p>
+     * Note this code is duplicated with the deprecated {@code LogConfig}.
+     *
+     * @return logfile location, or {@code null} if unable to determine
+     */
+    public static File getLogfile() {
+        return Log.getLogfile();
+    }
+
+    /**
      * Determines the location of a property based on the
      * following lookup mechanism:
      * <p>

@@ -199,13 +199,13 @@
 
               gnHttp.callService("subtemplate", params).then(function (response) {
                 var xml = response.data;
+
                 if (usingXlink) {
                   snippets.push(
                     gnEditorXMLService.buildXMLForXlink(
                       scope.schema,
                       scope.elementName,
                       url + "?uuid=" + uuid + "&process=" + params.process
-
                     )
                   );
                 } else {

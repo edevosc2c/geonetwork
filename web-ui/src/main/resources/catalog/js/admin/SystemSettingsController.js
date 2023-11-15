@@ -198,7 +198,6 @@
 
         $http.get("../api/site/info/notificationLevels").then(function (response) {
           $scope.notificationLevels = response.data;
-          $scope.notificationLevels .unshift("");
           $scope.notificationLevels.unshift("");
         });
 
@@ -207,10 +206,10 @@
           $scope.logfiles = response.data;
         });
 
-        $http
-          .get("../api/site/settings/details").then(
+        $http.get("../api/site/settings/details").then(
           function (response) {
             var data = response.data;
+
             var sectionsLevel1 = [];
             var sectionsLevel2 = [];
 
@@ -272,9 +271,11 @@
                 }, 900);
               }
             }
-          },function (response) {
+          },
+          function (response) {
             // TODO
-          });
+          }
+        );
         loadUiConfigurations();
       }
 
@@ -286,6 +287,7 @@
         $scope.uiConfigurationIdIsValid = false;
         return $http.get("../api/ui").then(function (response) {
           var data = response.data;
+
           for (var i = 0; i < data.length; i++) {
             data[i].configuration == angular.toJson(data[i].configuration);
 
@@ -440,18 +442,18 @@
           })
           .then(
             function (response) {
-            $(".gn-no-setting").attr("disabled", false);
+              $(".gn-no-setting").attr("disabled", false);
 
-            $rootScope.$broadcast("StatusUpdated", {
-              msg: $translate.instant("settingsUpdated"),
-              timeout: 2,
-              type: "success"
-            });
+              $rootScope.$broadcast("StatusUpdated", {
+                msg: $translate.instant("settingsUpdated"),
+                timeout: 2,
+                type: "success"
+              });
 
-            $scope.loadCatalogInfo();
-          },
-          function (response) {
-            $(".gn-no-setting").attr("disabled", false);
+              $scope.loadCatalogInfo();
+            },
+            function (response) {
+              $(".gn-no-setting").attr("disabled", false);
 
               $rootScope.$broadcast("StatusUpdated", {
                 title: $translate.instant("settingsUpdateError"),

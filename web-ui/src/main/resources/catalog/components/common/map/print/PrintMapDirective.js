@@ -97,6 +97,7 @@
       var http = $http.get(options.printConfigUrl);
       http.then(function (response) {
         var data = response.data;
+
         // default values:
         var layout = data.layouts[0];
         if ($scope.defaultLayout) {
