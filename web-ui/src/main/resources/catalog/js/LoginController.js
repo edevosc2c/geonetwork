@@ -84,15 +84,16 @@
       $scope.isShowLoginAsLink = gnGlobalSettings.isShowLoginAsLink;
       $scope.isUserProfileUpdateEnabled = gnGlobalSettings.isUserProfileUpdateEnabled;
 
-      // take the bigger of the two values$scope.passwordMinLength = Math.max(
+      // take the bigger of the two values
+      $scope.passwordMinLength = Math.max(
         gnConfig["system.security.passwordEnforcement.minLength"],
         6
-
-      );$scope.passwordMaxLength = Math.max(
+      );
+      $scope.passwordMaxLength = Math.max(
         gnConfig["system.security.passwordEnforcement.maxLength"],
         6
-
-      );$scope.passwordPattern = gnConfig["system.security.passwordEnforcement.pattern"];
+      );
+      $scope.passwordPattern = gnConfig["system.security.passwordEnforcement.pattern"];
 
       function initForm() {
         if ($window.location.pathname.indexOf("new.password") !== -1) {
