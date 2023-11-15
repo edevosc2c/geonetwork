@@ -51,7 +51,16 @@
     "$rootScope",
     "$translate",
     "gnESFacet",
-    function ($scope, $routeParams, $http, $rootScope, $translate, gnESFacet) {
+    "gnUtilityService",
+    function (
+      $scope,
+      $routeParams,
+      $http,
+      $rootScope,
+      $translate,
+      gnESFacet,
+      gnUtilityService
+    ) {
       $scope.healthy = undefined;
       $scope.nowarnings = undefined;
       $scope.threadSortField = undefined;
@@ -61,8 +70,8 @@
 
       $scope.indexStatus = null;
       function getIndexStatus() {
-        $http.get("../api/site/index/synchronized").success(function (data) {
-          $scope.indexStatus = data;
+        $http.get("../api/site/index/synchronized").then(function (response) {
+          $scope.indexStatus = response.data;
         });
       }
       getIndexStatus();
@@ -110,8 +119,8 @@
             "../api/site/threads/debugging/true/" +
               $scope.threadStatus.threadContentionMonitoringEnabled
           )
-          .success(function (data) {
-            $scope.threadStatus = data;
+          .then(function (response) {
+            $scope.threadStatus = response.data;
           });
       };
       $scope.toggleThreadCpuTime = function () {
@@ -120,8 +129,8 @@
             "../api/site/threads/debugging/false/" +
               $scope.threadStatus.threadCpuTimeEnabled
           )
-          .success(function (data) {
-            $scope.threadStatus = data;
+          .then(function (response) {
+            $scope.threadStatus = response.data;
           });
       };
       $scope.openThreadActivity = function (leaveOpen) {
@@ -132,9 +141,10 @@
         $scope.threadInfoLoading = true;
         $http
           .get("../api/site/threads/status")
-          .success(function (data) {
+          .then(
+          function (response) {
             $scope.threadInfoLoading = false;
-            $scope.threadStatus = data;
+            $scope.threadStatus = response.data;
 
             if (!leaveOpen) {
               $("html, body").animate(
@@ -150,8 +160,7 @@
                 $scope.openThreadActivity(true);
               }
             }, 2000);
-          })
-          .error(function () {
+          },function (response) {
             $scope.threadInfoLoading = false;
           });
       };
@@ -159,31 +168,31 @@
         $scope.selectedThread = thread;
         $scope.threadStackTrace = "Loading...";
         $("#stackTrace").modal("toggle");
-        $http.get("../api/site/threads/trace/" + thread.id).success(function (data) {
-          $scope.threadStackTrace = data.stackTrace;
+        $http.get("../api/site/threads/trace/" + thread.id).then(function (response) {
+          $scope.threadStackTrace = response.data.stackTrace;
         });
       };
-      $http
-        .get("../../criticalhealthcheck")
-        .success(function (data) {
+      $http.get("../../criticalhealthcheck").then(
+        function (response) {
           $scope.healthy = true;
-          $scope.criticalhealthcheck = data;
-        })
-        .error(function (data) {
+          $scope.criticalhealthcheck = response.data;
+        },
+        function (response) {
           $scope.healthy = false;
-          $scope.criticalhealthcheck = data;
-        });
+          $scope.criticalhealthcheck = response.data;
+        }
+      );
 
-      $http
-        .get("../../warninghealthcheck")
-        .success(function (data) {
+      $http.get("../../warninghealthcheck").then(
+        function (response) {
           $scope.nowarnings = true;
-          $scope.warninghealthcheck = data;
-        })
-        .error(function (data) {
+          $scope.warninghealthcheck = response.data;
+        },
+        function (response) {
           $scope.nowarnings = false;
-          $scope.warninghealthcheck = data;
-        });
+          $scope.warninghealthcheck = response.data;
+        }
+      );
 
       // log activity
       $scope.openLogActivity = function (leaveOpen) {
@@ -202,9 +211,10 @@
         $scope.logInfoLoading = true;
         $http
           .get("../api/site/logging/activity")
-          .success(function (data) {
+          .then(
+          function (response) {
             $scope.logInfoLoading = false;
-            $scope.logActivity = data;
+            $scope.logActivity = response.data;
 
             if (!leaveOpen) {
               $("html, body").animate(
@@ -220,8 +230,7 @@
                 $scope.openLogActivity(true);
               }
             }, 2000);
-          })
-          .error(function () {
+          },function (response) {
             $scope.logInfoLoading = false;
           });
       };
@@ -244,6 +253,10 @@
             });
           });
         });
+      };
+
+      $scope.getListOfUuids = function () {
+        return gnUtilityService.getSelectionListOfUuids("ies");
       };
 
       $scope.indexMessages = function (md) {
@@ -309,6 +322,7 @@
       };
       $scope.searchObj = {
         configId: "recordsWithErrors",
+        selectionBucket: "ies",
         defaultParams: {
           indexingErrorMsg: "*",
           sortBy: "changeDate",

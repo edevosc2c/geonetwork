@@ -183,7 +183,7 @@
 
   module.filter("facetTranslator", [
     "$translate",
-    function ($translate) {
+   "$filter", function ($translate, $filter) {
       return function (input, facetKey) {
         if (!input || angular.isObject(input)) {
           return input;
@@ -202,8 +202,12 @@
         // A specific facet key eg. "isHarvested-true"
         var translationId =
             (facetKeyToTranslationGroupMap.get(facetKey) || facetKey) + "-" + input,
-          translation = $translate.instant(translationId);
-        if (translation !== translationId) {
+          translation = undefined;
+        if (facetKey === "statusWorkflow") {
+          translation = $filter("getStatusLabel")(input);
+        } else {
+          translation =$translate.instant(translationId);
+        }if (translation !== translationId) {
           return translation;
         } else {
           // A common translations ?
@@ -224,7 +228,12 @@
     "$translate",
     function ($translate) {
       return function (input) {
-        return $translate.instant(input.replace(/(.key|.default|.lang{3}[a-z])$/, ""));
+        return $translate.instant(
+          input.replace(
+            /(?:.key|.default|Object(?:.default|.lang[a-z]{3}(?:.keyword)?)?)$/,
+            ""
+          )
+        );
       };
     }
   ]);
@@ -276,7 +285,7 @@
     if (this.facet.type === "tree") {
       this.item.path = [this.facet.key, this.item.key];
       this.item.collapsed = !this.searchCtrl.hasChildInSearch(this.item.path);
-    } else if (this.facet.type === "filters" || this.facet.type === "histogram") {
+    } else {
       this.item.inverted = this.searchCtrl.isNegativeSearch(this.item.path);
     }
   };
@@ -389,7 +398,34 @@
   module.filter("facetBgUrlBuilder", [
     function () {
       return function (key, decorator) {
-        return decorator.path ? decorator.path.replace("{key}", key) : decorator.map[key];
+        if (decorator && decorator.path) {
+          return "background-image:url('" + decorator.path.replace("{key}", key) + "')";
+        } else if (decorator && decorator.map) {
+          return "background-image:url('" + decorator.map[key] + "');";
+        }
+        return "";
+      };
+    }
+  ]);
+
+  module.filter("facetSearchUrlBuilder", [
+    function () {
+      return function (facetValue, key, response, config, missingValue) {
+        var field = (response.meta && response.meta.field) || key,
+          filter = config.filters
+            ? config.filters.filters[facetValue].query_string.query
+            : undefined,
+          value = response.meta && response.meta.wildcard ? facetValue + "*" : facetValue;
+
+        return (
+          '#/search?query_string={"' +
+          field +
+          '": {"' +
+          (value === missingValue ? "%23MISSING%23" : value) +
+          '": ' +
+          (filter ? '"' + filter + '"' : "true") +
+          "}}"
+        );
       };
     }
   ]);
@@ -397,9 +433,13 @@
   module.filter("facetCssClassCode", [
     function () {
       return function (key, isInspire) {
-        return isInspire
-          ? key.slice(key.lastIndexOf("/") + 1)
-          : key.replace("/", "").replace(" ", "");
+        if (key) {
+          return isInspire
+            ? key.slice(key.lastIndexOf("/") + 1)
+            : key.replace("/", "").replace(" ", "");
+        } else {
+          return "";
+        }
       };
     }
   ]);
@@ -412,9 +452,7 @@
         scope: {
           key: "=esFacetCards",
           homeFacet: "=homeFacet",
-          searchInfo: "=searchInfo",
-          aggResponse: "=aggResponse",
-          aggConfig: "=aggConfig"
+          searchInfo: "=searchInfo"
         },
         templateUrl: function (elem, attrs) {
           return (
@@ -424,13 +462,18 @@
           );
         },
         link: function (scope, element, attrs) {
-          scope.iso2lang = gnLangs.getIso2Lang();
+          scope.iso2lang = gnLangs.getIso2Lang(gnLangs.getCurrent());
 
           function init() {
             scope.missingValue =
               scope.homeFacet.config[scope.key].terms &&
               scope.homeFacet.config[scope.key].terms.missing;
             scope.isInspire = scope.key.indexOf("th_httpinspireeceuropaeutheme") === 0;
+
+            scope.aggregations = {};
+            scope.homeFacet.facets.forEach(function (facet) {
+              scope.aggregations[facet.key] = facet;
+            });
           }
 
           init();

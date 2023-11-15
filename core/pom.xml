@@ -27,13 +27,13 @@
   <parent>
     <artifactId>geonetwork</artifactId>
     <groupId>org.geonetwork-opensource</groupId>
-    <version>4.2.2-georchestra</version>
+    <version>4.2.6-georchestra</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>gn-core</artifactId>
   <name>GeoNetwork core</name>
-  <version>4.2.2-georchestra</version>
+  <version>4.2.6-georchestra</version>
 
   <dependencies>
     <dependency>
@@ -109,6 +109,24 @@
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-1.2-api</artifactId>
+    </dependency>
+    <!-- bridge java util logging api based on logging.properties -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-jul</artifactId>
+      <version>${log4j2.version}</version>
+    </dependency>
+    <!-- bridge slf4j api for testig wtih apacheds -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-slf4j-impl</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <!-- log4j 2 logging configured via log4j2.xml -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>${log4j2.version}</version>
     </dependency>
     <!-- bridge java util logging api based on logging.properties -->
     <dependency>
@@ -399,7 +417,7 @@
     <dependency>
       <groupId>org.apache.jclouds</groupId>
       <artifactId>jclouds-all</artifactId>
-      <version>2.2.1</version>
+      <version>2.3.0</version>
       <exclusions>
         <exclusion>
           <groupId>javax.annotation</groupId>
@@ -437,9 +455,18 @@
       <artifactId>openpdf</artifactId>
     </dependency>
     <dependency>
+      <groupId>com.github.librepdf</groupId>
+      <artifactId>openpdf</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.mapfish.print</groupId>
       <artifactId>print-lib</artifactId>
       <exclusions>
+        <exclusion>
+          <!-- provided by openpdf -->
+          <groupId>com.itextpdf</groupId>
+          <artifactId>itextpdf</artifactId>
+        </exclusion>
         <exclusion>
           <!-- provided by openpdf -->
           <groupId>com.itextpdf</groupId>
@@ -607,7 +634,7 @@
     <dependency>
       <groupId>com.amazonaws</groupId>
       <artifactId>aws-java-sdk-s3</artifactId>
-      <version>1.11.618</version>
+      <version>1.12.261</version>
     </dependency>
     <dependency>
       <groupId>org.jasypt</groupId>

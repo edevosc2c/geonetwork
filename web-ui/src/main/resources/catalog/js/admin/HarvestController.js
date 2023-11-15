@@ -91,20 +91,22 @@
       $scope.loadHarvesters = function () {
         $scope.isLoadingHarvester = true;
         $scope.harvesters = null;
-        return $http
-          .get("admin.harvester.list?_content_type=json&id=-1")
-          .success(function (data) {
+        return $http.get("admin.harvester.list?_content_type=json&id=-1").then(
+          function (response) {
+            var data = response.data;
+
             if (data != "null") {
               $scope.harvesters = data;
               gnUtilityService.parseBoolean($scope.harvesters);
               pollHarvesterStatus();
             }
             $scope.isLoadingHarvester = false;
-          })
-          .error(function (data) {
+          },
+          function (response) {
             // TODO
             $scope.isLoadingHarvester = false;
-          });
+          }
+        );
       };
 
       var getRunningHarvesterIds = function () {
@@ -134,16 +136,19 @@
             "admin.harvester.list?onlyInfo=true&_content_type=json&id=" +
               runningHarvesters.join("&id=")
           )
-          .success(function (data) {
-            isPolling = false;
-            if (data != "null") {
-              if (!angular.isArray(data)) {
-                data = [data];
-              }
-              var harvesterIndex = {};
-              angular.forEach($scope.harvesters, function (oldH) {
-                harvesterIndex[oldH["@id"]] = oldH;
-              });
+          .then(
+            function (response) {
+              var data = response.data;
+
+              isPolling = false;
+              if (data != "null") {
+                if (!angular.isArray(data)) {
+                  data = [data];
+                }
+                var harvesterIndex = {};
+                angular.forEach($scope.harvesters, function (oldH) {
+                  harvesterIndex[oldH["@id"]] = oldH;
+                });
 
               for (var i = 0; i < data.length; i++) {
                 var h = data[i];
@@ -159,8 +164,7 @@
 
               setTimeout(pollHarvesterStatus, 5000);
             }
-          })
-          .error(function (data) {
+          },function (response) {
             isPolling = false;
           });
       };

@@ -174,7 +174,7 @@
 
   <div class="col-lg-7" data-ng-hide="harvesterSelected['@id'] == null">
     <tabset id="harvester-tabset" type="pills" justified="false" role="tablist">
-      <tab heading="{{'settings' | translate}}" role="tab" active="true">
+      <tab heading="{{'settings' | translate}}" role="tab" active="activeTab.settings">
         <div id="gn-harvest-settings-panel" class="panel panel-default gn-margin-top">
           <div class="panel-heading clearfix">
             <span id="gn-harvest-settings-title">
@@ -288,7 +288,7 @@
           </div>
         </div>
       </tab>
-      <tab heading="{{'harvesterHistory'|translate}}" role="tab">
+      <tab heading="{{'harvesterHistory'|translate}}" role="tab"active="activeTab.history">
         <div
           id="gn-harvest-history-panel"
           class="panel panel-default gn-margin-top"
@@ -460,8 +460,9 @@
                           || isLoadingOneHarvester
                           || deleting.indexOf(harvesterSelected['@id']) > -1"
         role="tab"
-      >
-        <div id="gn-harvest-records-panel" data-ng-search-form="" class="gn-margin-top">
+
+        active="activeTab.results"
+      ><div id="gn-harvest-records-panel" data-ng-search-form="" class="gn-margin-top">
           <div class="panel panel-default">
             <div class="panel-heading">
               <span data-translate="">summary</span>

@@ -53,7 +53,7 @@
         controllerAs: "ctrl",
         controller: [
           "$scope",
-          function ($scope) {
+          function ($scope) {this.$onInit = function () {
             var ctrl = this;
 
             // create a vector layer to hold the features
@@ -140,15 +140,17 @@
               ctrl.map.removeInteraction(ctrl.overlay);
             });
 
-            // adjust ES request based on current filters
-            // (skip the initial watch trigger)
-            function reload(newValue, oldValue) {
-              if (!ctrl.enabled || oldValue === undefined) {
-                return;
+              // adjust ES request based on current filters
+              // (skip the initial watch trigger)
+              function reload(newValue, oldValue) {
+                if (!ctrl.enabled || oldValue === undefined) {
+                  return;
+                }
+                ctrl.refresh();
               }
-              ctrl.refresh();
-            }
-            $scope.$watch("ctrl.filter", reload, true);
+
+              $scope.$watch("ctrl.filter", reload, true);
+            };
           }
         ],
         link: function (scope, element, attrs) {
