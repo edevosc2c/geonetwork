@@ -82,8 +82,7 @@
        * if favicon parameter is set to true.
        */
       $scope.setCatalogLogo = function (logoName, asFavicon) {
-        $http
-          .put("../api/site/logo?file=" + logoName + "&asFavicon=" + asFavicon).then(
+        $http.put("../api/site/logo?file=" + logoName + "&asFavicon=" + asFavicon).then(
           function (response) {
             $rootScope.$broadcast("StatusUpdated", {
               msg: $translate.instant("logoUpdated"),

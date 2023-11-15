@@ -288,7 +288,11 @@
           </div>
         </div>
       </tab>
-      <tab heading="{{'harvesterHistory'|translate}}" role="tab"active="activeTab.history">
+      <tab
+        heading="{{'harvesterHistory'|translate}}"
+        role="tab"
+        active="activeTab.history"
+      >
         <div
           id="gn-harvest-history-panel"
           class="panel panel-default gn-margin-top"
@@ -460,9 +464,8 @@
                           || isLoadingOneHarvester
                           || deleting.indexOf(harvesterSelected['@id']) > -1"
         role="tab"
-
         active="activeTab.results"
-      ><div id="gn-harvest-records-panel" data-ng-search-form="" class="gn-margin-top">
+        ><div id="gn-harvest-records-panel" data-ng-search-form="" class="gn-margin-top">
           <div class="panel panel-default">
             <div class="panel-heading">
               <span data-translate="">summary</span>

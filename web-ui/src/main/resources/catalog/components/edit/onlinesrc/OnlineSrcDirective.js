@@ -885,7 +885,8 @@
                 scope.isEditing = angular.isDefined(linkToEdit);
                 // Flag used when editing an online resource to prevent the watcher to update the online
                 // resource description when loading the dialog.
-                scope.processSelectedWMSLayer = false;scope.codelistFilter =
+                scope.processSelectedWMSLayer = false;
+                scope.codelistFilter =
                   scope.gnCurrentEdit && scope.gnCurrentEdit.codelistFilter;
 
                 scope.metadataId = gnCurrentEdit.id;
@@ -1491,7 +1492,8 @@
                   return;
                 }
 
-                if (o !== n &&
+                if (
+                  o !== n &&
                   scope.params.selectedLayers &&
                   scope.params.selectedLayers.length > 0
                 ) {
@@ -1509,20 +1511,18 @@
                     descs.push(layer.Title || layer.title);
                   });
 
-
-                    if (scope.isMdMultilingual) {
-                      var langCode = scope.mdLangs[scope.mdLang];
-                      scope.params.name[langCode] = names.join(",");
-                      scope.params.desc[langCode] = descs.join(",");
-                    } else {
-                      angular.extend(scope.params, {
-                        name: names.join(","),
-                        desc: descs.join(",")
-                      });
-                    }
+                  if (scope.isMdMultilingual) {
+                    var langCode = scope.mdLangs[scope.mdLang];
+                    scope.params.name[langCode] = names.join(",");
+                    scope.params.desc[langCode] = descs.join(",");
+                  } else {
+                    angular.extend(scope.params, {
+                      name: names.join(","),
+                      desc: descs.join(",")
+                    });
                   }
                 }
-              );
+              });
 
               /**
                * Init link based on linkType configuration.

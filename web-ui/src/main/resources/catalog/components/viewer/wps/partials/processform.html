@@ -76,10 +76,11 @@
                   gn-bootstrap-datepicker="pickerValues"
                   config="{dateMin: getDateBounds(input, true), dateMax: getDateBounds(input, false)}"
                   data-date-format="dd-mm-yyyy"
-
-                >  <input
+                >
+                  <input
                     ng-model="field.value"
-                   data-ng-click="desactivateGeometryTool()" type="text"
+                    data-ng-click="desactivateGeometryTool()"
+                    type="text"
                     ng-blur="onBlur($event)"
                     class="input-sm form-control"
                   />
@@ -182,7 +183,7 @@
                   output-crs="{{ map.getView().getProjection().getCode() }}"
                   output-as-features="true"
                   map="map"
-                active-geometry-tool="activeGeometryTool"
+                  active-geometry-tool="activeGeometryTool"
                 />
               </div>
 

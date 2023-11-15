@@ -119,8 +119,7 @@
               url = url + "&removeId=" + tagsToRemove.join("&removeId=");
             }
 
-            $http
-              .put(url).then(
+            $http.put(url).then(
               function (response) {
                 var data = response.data;
                 scope.processReport = data;
@@ -140,7 +139,8 @@
 
                 scope.report = data;
                 defer.resolve(data);
-              },function (response) {
+              },
+              function (response) {
                 scope.processReport = response.data;
 
                 gnUtilityService.openModal(

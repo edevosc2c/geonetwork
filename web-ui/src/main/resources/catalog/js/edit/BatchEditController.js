@@ -304,8 +304,7 @@
         value,
         index,
         insertMode,
-        isXpath
-      ,
+        isXpath,
         condition
       ) {
         $scope.changes[index] = {
@@ -327,8 +326,7 @@
           field.template,
           $event.target.value,
           $scope.changes.length,
-          field.insertMode
-        ,
+          field.insertMode,
           field.condition
         );
       };
@@ -352,8 +350,7 @@
             field.template,
             $event.target.value,
             index,
-            field.insertMode
-          ,
+            field.insertMode,
             field.condition
           );
         }
@@ -478,8 +475,7 @@
           c.value,
           $scope.changes.length,
           c.insertMode,
-          true
-        ,
+          true,
           c.condition
         );
 
@@ -541,7 +537,7 @@
             } else {
               value = value;
             }
-            params.push({ xpath: xpath, value: value , condition: field.condition });
+            params.push({ xpath: xpath, value: value, condition: field.condition });
             i++;
           }
         });

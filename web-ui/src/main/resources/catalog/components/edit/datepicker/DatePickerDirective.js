@@ -180,11 +180,12 @@
 
             // Default to empty string and prevent 'Invalid Date' string to xmlSnippet
             scope.date = "";
-            if (moment(isDateTime ? tokens[0] : scope.value).isValid()) {scope.date = new Date(
-              moment(isDateTime ? tokens[0] : scope.value)
-                .utc()
-                .format()
-            );
+            if (moment(isDateTime ? tokens[0] : scope.value).isValid()) {
+              scope.date = new Date(
+                moment(isDateTime ? tokens[0] : scope.value)
+                  .utc()
+                  .format()
+              );
             }
 
             var time = tokens[1];

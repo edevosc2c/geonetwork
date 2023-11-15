@@ -131,11 +131,10 @@
               }
             });
 
-
-              window.addEventListener(
+            window.addEventListener(
               "resize",
               function (event) {
-              gnDebounce(refreshData, 50, true);
+                gnDebounce(refreshData, 50, true);
               },
               true
             );

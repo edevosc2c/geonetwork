@@ -136,15 +136,16 @@
               uitype: updated.uitype,
               uivalue: updated.uivalue
             }
-          })
-            .then(
+          }).then(
             function (response) {
               updateCacheOnCriteriaChange(group.id.schematronid, group.id.name);
 
               angular.copy(updated, original);
-            },function (response) {
+            },
+            function (response) {
               alert("Error updating criteria: " + original.id);
-            });
+            }
+          );
         },
         add: function (criteria, original, group) {
           $http({
@@ -266,15 +267,16 @@
                 includeCriteria: true,
                 schematronId: schematronId
               }
-            })
-              .then(function (response) {
+            }).then(
+              function (response) {
                 var data = response.data;
                 if (data === "null") {
                   data = [];
                 }
                 putDataIntoCache(groupCacheId(schematronId), data);
                 successFunction(data);
-              },function (response) {
+              },
+              function (response) {
                 alert(
                   "Error occurred during loading schematron criteria " +
                     " groups for schematron: " +

@@ -256,8 +256,7 @@
           dropFirst +
           "&asynchronous=true" +
           (index ? "&indices=" + index : "");
-        return $http
-          .put(url).then(
+        return $http.put(url).then(
           function (response) {
             checkIsIndexing();
           },
@@ -273,8 +272,7 @@
       };
 
       $scope.commitIndexChanges = function (dropFirst) {
-        return $http
-          .put("../api/site/index/commit").then(
+        return $http.put("../api/site/index/commit").then(
           function (response) {
             checkIsIndexing();
           },

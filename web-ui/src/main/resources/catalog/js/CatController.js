@@ -1533,7 +1533,8 @@
     "$cookies",
     "gnExternalViewer",
     "gnAlertService",
-    "gnESFacet",function (
+    "gnESFacet",
+    function (
       $scope,
       $http,
       $q,
@@ -1552,8 +1553,7 @@
       gnSearchSettings,
       $cookies,
       gnExternalViewer,
-      gnAlertService
-    ,
+      gnAlertService,
       gnESFacet
     ) {
       $scope.version = "0.0.1";

@@ -82,7 +82,8 @@
     "$timeout",
     "$window",
     "$q",
-    "$http",function (gnPopup, $translate, $location, $rootScope, $timeout, $window, $q, $http) {
+    "$http",
+    function (gnPopup, $translate, $location, $rootScope, $timeout, $window, $q, $http) {
       /**
        * Scroll page to element.
        */
@@ -433,7 +434,8 @@
           });
         });
         return defer.promise;
-      };return {
+      };
+      return {
         scrollTo: scrollTo,
         isInView: isInView,
         serialize: serialize,
@@ -444,7 +446,8 @@
         checkConfigurationPropertyCondition: checkConfigurationPropertyCondition,
         toCsv: toCsv,
         CSVToArray: CSVToArray,
-        getUrlParameter: getUrlParameter,getSelectionListOfUuids: getSelectionListOfUuids,
+        getUrlParameter: getUrlParameter,
+        getSelectionListOfUuids: getSelectionListOfUuids,
         randomUuid: randomUuid,
         displayPermalink: displayPermalink,
         openModal: openModal,

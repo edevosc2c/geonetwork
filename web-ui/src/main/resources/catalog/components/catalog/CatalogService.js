@@ -664,7 +664,6 @@
 
         var record = this;
 
-
         if (angular.isDefined(record.geom) && !angular.isArray(record.geom)) {
           record.geom = [record.geom];
         }

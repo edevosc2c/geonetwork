@@ -343,9 +343,7 @@
           }
 
           function loadUserGroup() {
-            $http
-              .get("../api/users/" + userIdForGroups + "/groups")
-              .then(
+            $http.get("../api/users/" + userIdForGroups + "/groups").then(
               function (response) {
                 var data = response.data;
                 var choices = [];

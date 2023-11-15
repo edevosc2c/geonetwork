@@ -139,9 +139,7 @@
           threadActivityEl.collapse("toggle");
         }
         $scope.threadInfoLoading = true;
-        $http
-          .get("../api/site/threads/status")
-          .then(
+        $http.get("../api/site/threads/status").then(
           function (response) {
             $scope.threadInfoLoading = false;
             $scope.threadStatus = response.data;
@@ -160,9 +158,11 @@
                 $scope.openThreadActivity(true);
               }
             }, 2000);
-          },function (response) {
+          },
+          function (response) {
             $scope.threadInfoLoading = false;
-          });
+          }
+        );
       };
       $scope.showStackTrace = function (thread, $event) {
         $scope.selectedThread = thread;
@@ -209,9 +209,7 @@
           logActivityEl.collapse("toggle");
         }
         $scope.logInfoLoading = true;
-        $http
-          .get("../api/site/logging/activity")
-          .then(
+        $http.get("../api/site/logging/activity").then(
           function (response) {
             $scope.logInfoLoading = false;
             $scope.logActivity = response.data;
@@ -230,9 +228,11 @@
                 $scope.openLogActivity(true);
               }
             }, 2000);
-          },function (response) {
+          },
+          function (response) {
             $scope.logInfoLoading = false;
-          });
+          }
+        );
       };
 
       $scope.downloadLog = function () {

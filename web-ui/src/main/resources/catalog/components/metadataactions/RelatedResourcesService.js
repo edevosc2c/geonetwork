@@ -282,10 +282,10 @@
           action: addWMTSToMap
         },
         "3DTILES": {
-            iconClass: "fa-globe",
-            label: "addToMap",
-            action: add3dTilesToMap
-          },
+          iconClass: "fa-globe",
+          label: "addToMap",
+          action: add3dTilesToMap
+        },
         TMS: {
           iconClass: "fa-globe",
           label: "addToMap",
@@ -517,7 +517,7 @@
             return "WMTS";
           } else if (protocolOrType.match(/3dtiles/i)) {
             return "3DTILES";
-          }else if (protocolOrType.match(/tms/i)) {
+          } else if (protocolOrType.match(/tms/i)) {
             return "TMS";
           } else if (protocolOrType.match(/wfs/i)) {
             return "WFS";

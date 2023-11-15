@@ -398,10 +398,9 @@
 
               featureTypes.forEach(function (featureTypeName) {
                 var layer = gnOwsCapabilities.getLayerInfoFromWfsCap(
-                featureTypeName,
-                capObj,
-                scope.uuid
-
+                  featureTypeName,
+                  capObj,
+                  scope.uuid
                 );
 
                 if (layer) {

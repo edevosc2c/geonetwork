@@ -133,22 +133,23 @@
                   cache: true,
                   timeout: REQUEST_TIMEOUT
                 })
-                .then(function (response) {
-                  try {
-                    defer.resolve(parseProjDef(response.data));
-                  } catch (e) {
-                    console.error(e);
-                    defer.reject($translate.instant("failedToParseProjDefinition"));
-                  }
-                },
-                function (response) {
-                  defer.reject(
-                    $translate.instant(
-                      response.status === 401
-                        ? "checkProjectionUrlUnauthorized"
-                        : "checkProjectionUrl",
-                      { url: url, status: response.status }
-                    )
+                .then(
+                  function (response) {
+                    try {
+                      defer.resolve(parseProjDef(response.data));
+                    } catch (e) {
+                      console.error(e);
+                      defer.reject($translate.instant("failedToParseProjDefinition"));
+                    }
+                  },
+                  function (response) {
+                    defer.reject(
+                      $translate.instant(
+                        response.status === 401
+                          ? "checkProjectionUrlUnauthorized"
+                          : "checkProjectionUrl",
+                        { url: url, status: response.status }
+                      )
                     );
                   }
                 );

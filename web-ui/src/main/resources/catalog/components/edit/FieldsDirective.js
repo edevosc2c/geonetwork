@@ -294,7 +294,8 @@
             $(".popover").hide();
           };
 
-          var mouseLeft = false;var initTooltip = function (event) {
+          var mouseLeft = false;
+          var initTooltip = function (event) {
             if (!isInitialized && gnCurrentEdit.displayTooltips) {
               // Retrieve field information (there is a cache)
               gnSchemaManagerService
@@ -376,11 +377,12 @@
                           $(this).closest("div.popover").remove();
                         });
 
-                    if (event === "click" && !isField) {
-                      tooltipTarget.click("show");
-                    } else {
-                      tooltipTarget.focus();
-                    }}
+                      if (event === "click" && !isField) {
+                        tooltipTarget.click("show");
+                      } else {
+                        tooltipTarget.focus();
+                      }
+                    }
 
                     if (tooltipsMode === "icon") {
                       tooltipTarget.mouseleave(function () {

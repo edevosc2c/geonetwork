@@ -266,9 +266,11 @@
                   scope.resource.title,
                   scope.resource["abstract"]
                 )
-                .then(function (response) {
+                .then(
+                  function (response) {
                     readResponse(response.data, "publish");
-                  },function (response) {
+                  },
+                  function (response) {
                     scope.statusCode = response.data.description;
                     scope.isPublished = false;
                   }

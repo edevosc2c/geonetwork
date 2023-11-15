@@ -311,8 +311,7 @@
 
       $scope.formatterDelete = function (f) {
         var url = "../api/formatters/" + f.schema + "/" + f.id;
-        $http
-          .delete(url).then(
+        $http.delete(url).then(
           function (response) {
             $scope.formatterSelected = null;
             loadFormatter();

@@ -150,23 +150,25 @@
                   harvesterIndex[oldH["@id"]] = oldH;
                 });
 
-              for (var i = 0; i < data.length; i++) {
-                var h = data[i];
-                gnUtilityService.parseBoolean(h.info);
-                var old = harvesterIndex[h["@id"]];
-                if (old && !angular.equals(old.info, h.info)) {
-                  old.info = h.info;
+                for (var i = 0; i < data.length; i++) {
+                  var h = data[i];
+                  gnUtilityService.parseBoolean(h.info);
+                  var old = harvesterIndex[h["@id"]];
+                  if (old && !angular.equals(old.info, h.info)) {
+                    old.info = h.info;
+                  }
+                  if (old && !angular.equals(old.error, h.error)) {
+                    old.error = h.error;
+                  }
                 }
-                if (old && !angular.equals(old.error, h.error)) {
-                  old.error = h.error;
-                }
-              }
 
-              setTimeout(pollHarvesterStatus, 5000);
+                setTimeout(pollHarvesterStatus, 5000);
+              }
+            },
+            function (response) {
+              isPolling = false;
             }
-          },function (response) {
-            isPolling = false;
-          });
+          );
       };
 
       $scope.refreshHarvester = function () {

@@ -69,8 +69,7 @@
               status: "pending",
               deferred: defer
             });
-            feedPromise
-              .then(
+            feedPromise.then(
               function (response) {
                 var currentDefer = feedsCache.get(url).deferred;
                 try {
@@ -86,7 +85,8 @@
                 var currentDefer = feedsCache.get(url).deferred;
                 feedsCache.put(url, { data: "url_unavailable", status: "fail" });
                 currentDefer.reject("url_unavailable");
-              });
+              }
+            );
           } else {
             feedsCache.put(url, { data: "invalid_url", status: "fail" });
             defer.reject("invalid_url");

@@ -201,7 +201,6 @@
             $http
               .get("info?_content_type=json&" + "type=groupsIncludingSystemGroups", {
                 cache: true
-
               })
               .then(function (response) {
                 scope.groups = response.data !== "null" ? response.data.group : null;

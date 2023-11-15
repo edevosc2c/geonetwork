@@ -137,8 +137,7 @@
 
       $scope.updateSource = function () {
         var url = "../api/sources" + ($scope.isNew ? "" : "/" + $scope.source.uuid);
-        $http
-          .put(url, $scope.source).then(
+        $http.put(url, $scope.source).then(
           function (response) {
             $rootScope.$broadcast("StatusUpdated", {
               msg: $translate.instant("sourceUpdated"),
@@ -155,7 +154,8 @@
               timeout: 0,
               type: "danger"
             });
-          });
+          }
+        );
       };
 
       $scope.deleteSourceConfig = function () {
@@ -163,8 +163,7 @@
       };
 
       $scope.confirmDeleteSourceConfig = function () {
-        $http
-          .delete("../api/sources/" + $scope.source.uuid).then(
+        $http.delete("../api/sources/" + $scope.source.uuid).then(
           function (response) {
             $rootScope.$broadcast("StatusUpdated", {
               msg: $translate.instant("sourceRemoved"),

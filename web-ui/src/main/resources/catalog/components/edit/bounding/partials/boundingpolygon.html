@@ -22,40 +22,37 @@
       </div>
     </div>
 
-  <div class="pull-right"
-        ng-if="!ctrl.readOnly"
-      >
-        <div class="pull-right">
-          <label class="text-muted control-label" translate>drawOnMap</label>
-          <br />
-          <div gi-btn-group>
+    <div class="pull-right" ng-if="!ctrl.readOnly">
+      <div class="pull-right">
+        <label class="text-muted control-label" translate>drawOnMap</label>
+        <br />
+        <div gi-btn-group>
+          <div class="btn-group">
             <div class="btn-group">
-              <div class="btn-group">
-                <button
-                  class="btn btn-default"
-                  gi-btn="active"
-                  ng-model="ctrl.drawInteraction.active"
-                >
-                  <span class="fa fa-pencil"></span>&nbsp;
-                  <span translate>Polygon</span>
-                </button>
-                <button
-                  class="btn btn-default"
-                  gi-btn="active"
-                  ng-model="ctrl.drawLineInteraction.active"
-
-              >    <span class="fa fa-pencil"></span>&nbsp;
-                  <span translate>Line</span>
-                </button>
-              </div>
+              <button
+                class="btn btn-default"
+                gi-btn="active"
+                ng-model="ctrl.drawInteraction.active"
+              >
+                <span class="fa fa-pencil"></span>&nbsp;
+                <span translate>Polygon</span>
+              </button>
+              <button
+                class="btn btn-default"
+                gi-btn="active"
+                ng-model="ctrl.drawLineInteraction.active"
+              >
+                <span class="fa fa-pencil"></span>&nbsp;
+                <span translate>Line</span>
+              </button>
             </div>
-            <button
-              class="btn btn-default"
-              gi-btn="active"
-              ng-model="ctrl.modifyInteraction.active"
-
-
-          >  <span class="fa fa-pencil"></span>&nbsp;
+          </div>
+          <button
+            class="btn btn-default"
+            gi-btn="active"
+            ng-model="ctrl.modifyInteraction.active"
+          >
+            <span class="fa fa-pencil"></span>&nbsp;
             <span translate>modifyGeometry</span>
           </button>
         </div>

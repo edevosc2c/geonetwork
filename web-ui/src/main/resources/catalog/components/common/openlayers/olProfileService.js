@@ -105,8 +105,7 @@
      * Out callback function.
      * @type {function()}
      */
-    var outCallback =
-      options.outCallback !== undefined ? options.outCallback : null;
+    var outCallback = options.outCallback !== undefined ? options.outCallback : null;
 
     /**
      * Distance data extractor used to get the dist values.

@@ -157,9 +157,7 @@
             }
           );
         } else {
-          $http
-            .get("../api/users/" + $scope.user.id + "/groups")
-            .then(
+          $http.get("../api/users/" + $scope.user.id + "/groups").then(
             function (response) {
               // Extract the group property from user groups array
               var groups = _.map(response.data, "group");

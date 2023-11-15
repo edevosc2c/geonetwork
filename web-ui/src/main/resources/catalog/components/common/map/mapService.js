@@ -1992,10 +1992,11 @@
                       if (!createOnly) {
                         map.addLayer(olL);
                       }
-  olL.set(
+                      olL.set(
                         "layerTitleFromMetadata",
                         $this.getLinkDescription(olL.get("md"), url, name)
-                      );                    gnWmsQueue.removeFromQueue(url, name, map);
+                      );
+                      gnWmsQueue.removeFromQueue(url, name, map);
                       defer.resolve(olL);
                     };
 

@@ -397,27 +397,25 @@
                               if (!geom) {
                                 return;
                               }
-                            var geom_type;
-                            geom = geom.toLowerCase();
-                            switch (
-                              geom
-                            ) {
-                              case "line":
-                                geom_type = "LineString";
-                                break;
+                              var geom_type;
+                              geom = geom.toLowerCase();
+                              switch (geom) {
+                                case "line":
+                                  geom_type = "LineString";
+                                  break;
 
-                              case "point":
-                                geom_type = "Point";
-                                break;
+                                case "point":
+                                  geom_type = "Point";
+                                  break;
 
-                              case "polygon":
-                                geom_type = "Polygon";
-                                break;
+                                case "polygon":
+                                  geom_type = "Polygon";
+                                  break;
 
-                              // TODO: add other types?
+                                // TODO: add other types?
 
-                              default:
-                                geom_type = null;
+                                default:
+                                  geom_type = null;
                               }
                               if (geom_type && isMulti) {
                                 geom_type = "Multi" + geom_type;
@@ -443,7 +441,7 @@
                                   .map(function (i) {
                                     return i.href;
                                   })[0]
-                            );
+                              );
                             }
                             // try in ows:Metadata if not found
                             if (
@@ -778,16 +776,18 @@
 
             scope.running = true;
             scope.executeState = "sent";
-            gnWpsService.execute(processUri, processId, inputs, output, scope.processDescription).then(
-              function (response) {
-                processResponse(response);
-              },
-              function (response) {
-                scope.executeState = "failed";
-                scope.executeResponse = response;
-                scope.running = false;
-              }
-            );
+            gnWpsService
+              .execute(processUri, processId, inputs, output, scope.processDescription)
+              .then(
+                function (response) {
+                  processResponse(response);
+                },
+                function (response) {
+                  scope.executeState = "failed";
+                  scope.executeResponse = response;
+                  scope.running = false;
+                }
+              );
 
             // update local storage
             if ($window.localStorage) {

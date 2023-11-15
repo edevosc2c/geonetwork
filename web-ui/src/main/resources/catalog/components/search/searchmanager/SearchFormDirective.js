@@ -541,7 +541,6 @@
         facet.items.length + (moreItemsNumber || 20),
         facet.include || undefined,
         facet.exclude || undefined
-
       );
     };
 
