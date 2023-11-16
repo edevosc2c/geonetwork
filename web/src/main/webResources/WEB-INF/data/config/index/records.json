@@ -1023,15 +1023,6 @@
               "mineral resources => http://inspire.ec.europa.eu/theme/mr"
             ]
           }
-        },
-        "normalizer": {
-          "case_insensitive": {
-            "char_filter": [],
-            "filter": [
-              "lowercase", "asciifolding"
-            ],
-            "type": "custom"
-          }
         }
       }
     }
@@ -1171,19 +1162,6 @@
                   }
                 }
               },
-              "langdut": {
-                "type": "text",
-                "analyzer": "dutch",
-                "copy_to": [
-                  "any.langdut"
-                ],
-                "fields": {
-                  "keyword": {
-                    "type": "keyword",
-                    "ignore_above": ${es.index.ignore_above}
-                  }
-                }
-              },
               "langita": {
                 "type": "text",
                 "analyzer": "italian",
@@ -1299,16 +1277,6 @@
                   "any.langdut"
                 ]
               },
-              "langdut": {
-                "type": "keyword",
-                "copy_to": ["any.langger"]
-              },
-              "langdut": {
-                "type": "keyword",
-                "copy_to": [
-                  "any.langdut"
-                ]
-              },
               "langita": {
                 "type": "keyword",
                 "copy_to": ["any.langita"]
@@ -1340,14 +1308,6 @@
                 "type": "keyword"
               }
             }
-          }
-        }
-      },
-      {
-        "org": {
-          "match": "*Org*",
-          "mapping": {
-            "type": "keyword"
           }
         }
       },
@@ -1540,17 +1500,8 @@
           },
           "langdut": {
             "type": "keyword",
-            "copy_to": ["any.langger"]
-          },
-          "langdut": {
-            "type": "keyword",
             "copy_to": [
               "any.langdut"
-              ]
-          },
-          "langdut": {
-            "type": "keyword",
-            "copy_to": ["any.langdut"
               ]
           },
           "langita": {
@@ -1836,22 +1787,6 @@
           }
         }
       },
-      "resourceTypeNameObject": {
-        "type": "object",
-        "properties": {
-          "default": {
-            "type": "keyword"
-          }
-        }
-      },
-      "resourceTypeNameObject": {
-        "type": "object",
-        "properties": {
-          "default": {
-            "type": "keyword"
-          }
-        }
-      },
       "resourceIdentifier": {
         "type": "object",
         "properties": {
@@ -1934,8 +1869,7 @@
         "type": "keyword"
       },
       "format": {
-        "type": "keyword",
-        "normalizer": "case_insensitive"
+        "type": "keyword"
       },
       "spatialRepresentationType": {
         "type": "keyword"
